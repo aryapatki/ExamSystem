@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function nextPage(){
+            console.log('one');
+            console.log('entering ajax run');
+            var xhttp=new XMLHttpRequest();
+            xhttp.onreadystatechange=()=>{
+                if(xhttp.readyState===XMLHttpRequest.DONE && xhttp.status===200){
+                    console.log(xhttp.responseText);
+                    var data=JSON.parse(xhttp.responseText);
+                    document.getElementById("p1").innerHTML=data.c.question;
+
+                }
+            };
+
+            xhttp.open("GET","/pageChange",true);
+            xhttp.send();
+            console.log('leaving ajax run');
+        }
+    </script>
+</head>
+<body>
+    <h1>question paper</h1>
+
+  <!-- <form action="" method="POST"> -->
+      <div>
+           <p id="p1">content</p>
+            <label class="1"><%= qs.question %> </label><br>
+            <input type="radio" name="op" id="a">a)<%= qs.a %> <br> 
+            <input type="radio" name="op" id="b">b)<%= qs.b %> <br>
+            <input type="radio" name="op" id="c">c)<%= qs.c %> <br>
+            <input type="radio" name="op" id="d">d)<%= qs.d %> <br>
+
+            
+           <button onclick="nextPage()">next</button>
+            <!-- <input type="submit" value="submit"> -->
+      </div>  
+    <!-- </form>     -->
+</body>
+</html>
