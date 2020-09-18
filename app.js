@@ -13,7 +13,8 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 const flash = require('express-flash')
 const methodOverride = require('method-override')
-const initializePassport = require('./passport-config')
+const initializePassport = require('./passport-config');
+const { waitForDebugger } = require('inspector');
 //////////////////////////////////////////////////////////////
 
 app.use(bodyParser.json());
@@ -42,7 +43,7 @@ initializePassport(
   app.use(express.urlencoded({ extended: false }))
   app.use(flash())
   app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret:'secret',
     resave: false,
     saveUninitialized: false
   }))
@@ -83,8 +84,8 @@ initializePassport(
     }
   })
   
-  app.delete('/logout', (req, res) => {
-    req.logOut()
+  app.get('/logout', (req, res) => {
+    req.session.destroy();
     res.redirect('/login')
   })
   
@@ -104,16 +105,38 @@ initializePassport(
   }
   ////////////////////////////////////////////////////////////
  
-app.get('/',(req,res)=>{
+app.get('/start',checkAuthenticated,(req,res)=>{
     res.render('qp',{'qs':db.QuestionSet[0]})
+    req.session.count=0;
+    console.log(req.session.count);
 });
-count=1;
+
+///////////////////////////////////////////////////////////////////
+
 app.get('/pageChange',(req,res)=>{
+    if(req.session.count===6){
+        console.log('inside if');
+        res.redirect('/result');
+
+    }
+    else{
+        if(req.session.count===undefined){
+            req.session.count=0;
+        }
+        console.log(req.session.count);
+        res.setHeader('Content-Type','application/json');
+        res.send(JSON.stringify({c:db.QuestionSet[req.session.count++]}));
+        
+    }
     
-    res.setHeader('Content-Type','application/json');
-    res.send(JSON.stringify({c:db.QuestionSet[count++]}));
-    console.log('one');
-    console.log(count);
+});
+
+
+app.get('/result',(req,res)=>{
+    //res.write('<h2>this is result page temporary</h2>');
+
+    res.send('<h2>this is result page temporary</h2>')
+   //res.render('result');
 });
 
 app.listen(3000,()=>{
