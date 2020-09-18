@@ -6,7 +6,7 @@ var session=require('express-session');
 var path=require('path')
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-var auth=require('./routes/auth');
+//var auth=require('./routes/auth');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
@@ -17,11 +17,14 @@ app.use(session({
         saveUninitialized:false,
         resave:false
       }));
- 
-app.use('/auth',auth);
+
  
 app.get('/',(req,res)=>{
     res.render('qp',{'qs':db.QuestionSet[0]})
+});
+
+app.get('/result',(req,res)=>{
+    res.render('result');
 });
 count=1;
 app.get('/pageChange',(req,res)=>{
