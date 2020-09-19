@@ -7,7 +7,7 @@ app.set('view engine', 'ejs');
 var path=require('path');
 app.set('views', path.join(__dirname, 'views'));
 //var auth=require('./routes/auth');
-
+/////////////////////////
 ///////////////////////////////////////////////////
 const bcrypt = require('bcrypt')
 const passport = require('passport')
