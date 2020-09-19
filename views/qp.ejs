@@ -5,6 +5,22 @@
     <title>Document</title>
     <script>
         function nextPage(){
+//             $(document).ready(function () {
+//     $('#myform').on('submit', function(e) {
+//         e.preventDefault();
+//         $.ajax({
+//             url : $(this).attr('action') || window.location.pathname,
+//             type: "GET",
+//             data: $(this).serialize(),
+//             success: function (data) {
+//                 $("#form_output").html(data);
+//             },
+//             error: function (jXHR, textStatus, errorThrown) {
+//                 alert(errorThrown);
+//             }
+//         });
+//     });
+// });
             console.log('one');
             console.log('entering ajax run');
             var xhttp=new XMLHttpRequest();
@@ -13,6 +29,11 @@
                     console.log(xhttp.responseText);
                     var data=JSON.parse(xhttp.responseText);
                     document.getElementById("p1").innerHTML=data.c.question;
+                    document.getElementById("question").innerHTML=data.c.question;
+                    document.getElementById("a1").innerHTML=data.c.a;
+                    document.getElementById("b1").innerHTML=data.c.b;
+                    document.getElementById("c1").innerHTML=data.c.c;
+                    document.getElementById("d1").innerHTML=data.c.d;
 
                 }
             };
@@ -26,14 +47,14 @@
 <body>
     <h1>question paper</h1>
 
-  <!-- <form action="" method="POST"> -->
+  <!-- <form action="" id="myform" method="POST"> -->
       <div>
            <p id="p1">content</p>
-            <label class="1"><%= qs.question %> </label><br>
-            <input type="radio" name="op" id="a">a)<%= qs.a %> <br> 
-            <input type="radio" name="op" id="b">b)<%= qs.b %> <br>
-            <input type="radio" name="op" id="c">c)<%= qs.c %> <br>
-            <input type="radio" name="op" id="d">d)<%= qs.d %> <br>
+            <label id="question"><%= qs.question %> </label><br>
+            <input type="radio" name="op" id="a">a)<span id="a1"><%= qs.a %> </span><br> 
+            <input type="radio" name="op" id="b">b)<span id="b1"><%= qs.b %> </span><br>
+            <input type="radio" name="op" id="c">c)<span id="c1"><%= qs.c %> </span><br>
+            <input type="radio" name="op" id="d">d)<span id="d1"><%= qs.d %> </span><br>
 
             
            <button onclick="nextPage()">next</button>
