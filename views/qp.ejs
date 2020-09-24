@@ -12,13 +12,15 @@
                 if(xhttp.readyState===XMLHttpRequest.DONE && xhttp.status===200){
                     console.log(xhttp.responseText);
                     var data=JSON.parse(xhttp.responseText);
-                    document.getElementById("p1").innerHTML=data.c.question;
+                    if(data.url!==""){
+                        window.location.replace(data.url);
+                    }
+                    //document.getElementById("p1").innerHTML=data.c.question;
                     document.getElementById("question").innerHTML=data.c.question;
                     document.getElementById("a1").innerHTML=data.c.a;
                     document.getElementById("b1").innerHTML=data.c.b;
                     document.getElementById("c1").innerHTML=data.c.c;
                     document.getElementById("d1").innerHTML=data.c.d;
-
                 }
             };
 
@@ -34,7 +36,7 @@
 
   <!-- <form action="" id="myform" method="POST"> -->
       <div id="finputs">
-           <p id="p1">content</p>
+           <!-- <p id="p1">content</p> -->
             <label id="question"><%= qs.question %> </label><br>
             <input type="radio" name="op" id="a">a)<span id="a1"><%= qs.a %> </span><br> 
             <input type="radio" name="op" id="b">b)<span id="b1"><%= qs.b %> </span><br>
@@ -42,7 +44,7 @@
             <input type="radio" name="op" id="d">d)<span id="d1"><%= qs.d %> </span><br>
 
             
-           <button onclick="nextPage()">next</button>
+           
             <!-- <input type="submit" value="submit"> -->
       </div> 
       <div id="fbuttons">

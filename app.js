@@ -105,7 +105,7 @@ initializePassport(
   ////////////////////////////////////////////////////////////
  
 app.get('/start',checkAuthenticated,(req,res)=>{
-    res.render('qp',{'qs':db.QuestionSet[0]})
+    res.render('qp',{'qs':db.QuestionSet[0]});
     req.session.count=0;
     console.log(req.session.count);
 });
@@ -113,33 +113,30 @@ app.get('/start',checkAuthenticated,(req,res)=>{
 ///////////////////////////////////////////////////////////////////
 
 app.get('/pageChange',(req,res)=>{
+    redir="";
     if(req.session.count===6){
         console.log('inside if');
-        //app.use(express.static("result"));
-        console.log('inside result');
-        //res.send('<h2>this is result page temporary</h2>')
-         res.render('result');
+
+         redir="http://localhost:3000/result";
 
     }
-    else{
+    // else{
         if(req.session.count===undefined){
             req.session.count=0;
         }
         console.log(req.session.count);
         res.setHeader('Content-Type','application/json');
-        res.send(JSON.stringify({c:db.QuestionSet[req.session.count++]}));
+        res.send(JSON.stringify({c:db.QuestionSet[req.session.count++],url:redir}));
         
-    }
+    // }
     
 });
 
 
-// app.get('/result',callResult(req,res){
-//     //res.write('<h2>this is result page temporary</h2>');
-//   console.log('inside result');
-//     //res.send('<h2>this is result page temporary</h2>')
-//    res.render('result');
-// });
+app.get('/result',(req,res)=>{
+  console.log('inside result');
+   res.render('result');
+});
 
 app.listen(3000,()=>{
     console.log("app running on port 3000");
