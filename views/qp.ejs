@@ -3,9 +3,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-
+        var a = [];
         function nextPage(){
+           var x = $("form").serializeArray();
+            $.each(x, function(i, field){
+      a.push(field.value);
+
+    });
             console.log('entering ajax run');
             var xhttp=new XMLHttpRequest();
             xhttp.onreadystatechange=()=>{
@@ -13,9 +19,11 @@
                     console.log(xhttp.responseText);
                     var data=JSON.parse(xhttp.responseText);
                     if(data.url!==""){
+                       $.post('/scorecounter', {a:a});
                         window.location.replace(data.url);
                     }
-                    //document.getElementById("p1").innerHTML=data.c.question;
+                    document.getElementById("qno").innerHTML=data.c.index;
+                    document.getElementById("qno").className=data.c.index;
                     document.getElementById("question").innerHTML=data.c.question;
                     document.getElementById("a1").innerHTML=data.c.a;
                     document.getElementById("b1").innerHTML=data.c.b;
@@ -34,23 +42,18 @@
 <body>
     <h1>question paper</h1>
 
-  <!-- <form action="" id="myform" method="POST"> -->
+  <form action="" id="myform">
       <div id="finputs">
-           <!-- <p id="p1">content</p> -->
+           <label name="qno" id="qno">1) </label>
             <label id="question"><%= qs.question %> </label><br>
-            <input type="radio" name="op" id="a">a)<span id="a1"><%= qs.a %> </span><br> 
-            <input type="radio" name="op" id="b">b)<span id="b1"><%= qs.b %> </span><br>
-            <input type="radio" name="op" id="c">c)<span id="c1"><%= qs.c %> </span><br>
-            <input type="radio" name="op" id="d">d)<span id="d1"><%= qs.d %> </span><br>
-
-            
-           
-            <!-- <input type="submit" value="submit"> -->
+            <label><input type="radio" name="op" value="a" id="a" checked >a)<span id="a1"><%= qs.a %> </span><br></label>
+            <label><input type="radio" name="op" value="b" id="b"  >b)<span id="b1"><%= qs.b %> </span><br></label>
+            <label><input type="radio" name="op" value="c" id="c"  >c)<span id="c1"><%= qs.c %> </span><br></label>
+            <label><input type="radio" name="op" value="d" id="d"  >d)<span id="d1"><%= qs.d %> </span><br></label>
       </div> 
-      <div id="fbuttons">
-        <button onclick="nextPage()">next</button>
+    </form>    
+    <div id="fbuttons">
+        <button id="np" onclick="nextPage()">next</button>
       </div> 
-    <!-- </form>     -->
-
 </body>
 </html>

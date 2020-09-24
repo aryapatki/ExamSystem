@@ -27,7 +27,6 @@ app.use(session({
         resave:false
       }));
  
-//app.use('/auth',auth);
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -50,8 +49,8 @@ initializePassport(
   app.use(passport.session())
   app.use(methodOverride('_method'))
   
-  app.get('/', checkAuthenticated, (req, res) => {
-    res.render('index.ejs', { name: req.user.name })
+  app.get('/',(req, res) => {
+    res.render('register.ejs');
   })
   
   app.get('/login', checkNotAuthenticated, (req, res) => {
@@ -106,13 +105,14 @@ initializePassport(
  
 app.get('/start',checkAuthenticated,(req,res)=>{
     res.render('qp',{'qs':db.QuestionSet[0]});
+    console.log('inside start');
     req.session.count=0;
     console.log(req.session.count);
 });
 
 ///////////////////////////////////////////////////////////////////
 
-app.get('/pageChange',(req,res)=>{
+app.get('/pageChange',checkAuthenticated,(req,res)=>{
     redir="";
     if(req.session.count===6){
         console.log('inside if');
@@ -120,23 +120,36 @@ app.get('/pageChange',(req,res)=>{
          redir="http://localhost:3000/result";
 
     }
-    // else{
+      console.log('inside pagechange');
         if(req.session.count===undefined){
-            req.session.count=0;
+            req.session.count=1;
         }
         console.log(req.session.count);
         res.setHeader('Content-Type','application/json');
         res.send(JSON.stringify({c:db.QuestionSet[req.session.count++],url:redir}));
-        
-    // }
     
 });
+score=0;
+app.post('/scorecounter',checkAuthenticated,(req,res)=>{
+  console.log(req.body.a);
+  for(i=0;i<6;i++){
+    if(req.body.a[i]===db.QuestionSet[i].ans){
+      score++;
+    }
+  }
+})
 
 
-app.get('/result',(req,res)=>{
+app.get('/result',checkAuthenticated,(req,res)=>{
   console.log('inside result');
-   res.render('result');
+  console.log(score);
+   res.render('result',{score:score});
 });
+
+app.get('/logout',(req,res)=>{
+  req.session.destroy();
+  res.redirect('/login');
+})
 
 app.listen(3000,()=>{
     console.log("app running on port 3000");
