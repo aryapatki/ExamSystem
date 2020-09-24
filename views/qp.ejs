@@ -4,24 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
+
         function nextPage(){
-//             $(document).ready(function () {
-//     $('#myform').on('submit', function(e) {
-//         e.preventDefault();
-//         $.ajax({
-//             url : $(this).attr('action') || window.location.pathname,
-//             type: "GET",
-//             data: $(this).serialize(),
-//             success: function (data) {
-//                 $("#form_output").html(data);
-//             },
-//             error: function (jXHR, textStatus, errorThrown) {
-//                 alert(errorThrown);
-//             }
-//         });
-//     });
-// });
-            console.log('one');
             console.log('entering ajax run');
             var xhttp=new XMLHttpRequest();
             xhttp.onreadystatechange=()=>{
@@ -41,6 +25,7 @@
             xhttp.open("GET","/pageChange",true);
             xhttp.send();
             console.log('leaving ajax run');
+           
         }
     </script>
 </head>
@@ -48,7 +33,7 @@
     <h1>question paper</h1>
 
   <!-- <form action="" id="myform" method="POST"> -->
-      <div>
+      <div id="finputs">
            <p id="p1">content</p>
             <label id="question"><%= qs.question %> </label><br>
             <input type="radio" name="op" id="a">a)<span id="a1"><%= qs.a %> </span><br> 
@@ -59,7 +44,11 @@
             
            <button onclick="nextPage()">next</button>
             <!-- <input type="submit" value="submit"> -->
-      </div>  
+      </div> 
+      <div id="fbuttons">
+        <button onclick="nextPage()">next</button>
+      </div> 
     <!-- </form>     -->
+
 </body>
 </html>
