@@ -2,7 +2,7 @@
     "OS":[
         {
         "index":1,
-        "question":" Which process can be affected by other processes executing in the system?",
+        "question":"1. Which process can be affected by other processes executing in the system?",
         "a":" cooperating process",
         "b":" child process",
         "c":" parent process",
@@ -12,7 +12,7 @@
 
         {
         "index":2,
-        "question":" When several processes access the same data concurrently and the outcome of the execution depends on the particular order in which the access takes place, is called?",
+        "question":"2. When several processes access the same data concurrently and the outcome of the execution depends on the particular order in which the access takes place, is called?",
         "a":" dynamic condition",
         "b":" race condition",
         "c":" essential condition",
@@ -22,7 +22,7 @@
 
         {
         "index":3,
-        "question":"If a process is executing in its critical section, then no other processes can be executing in their critical section. This condition is called?",
+        "question":"3. If a process is executing in its critical section, then no other processes can be executing in their critical section. This condition is called?",
         "a":" mutual exclusion",
         "b":" critical exclusion",
         "c":" synchronous exclusion",
@@ -32,7 +32,7 @@
 
         {
         "index":4,
-        "question":"Which of the following is a synchronisation tool?",
+        "question":"4. Which of the following is a synchronisation tool?",
         "a":" thread",
         "b":" pipe",
         "c":" semaphore",
@@ -43,7 +43,7 @@
 
         {
         "index":5,
-        "question":"A semaphore  is a shared integer variable_____",
+        "question":"5. A semaphore  is a shared integer variable_____",
         "a":" that can not drop below zero",
         "b":" that can not be more than zero",
         "c":" that can not drop below one",
@@ -53,7 +53,7 @@
 
         {
         "index":6,
-        "question":"Mutual exclusion can be provided by the ____________",
+        "question":"6. Mutual exclusion can be provided by the ____________",
         "a":" mutex locks",
         "b":" binary semaphores",
         "c":" both mutex locks and binary semaphores",
@@ -64,7 +64,7 @@
     "CN":[
         {
         "index":1,
-        "question":"When collection of various computers seems a single coherent system to its client, then it is called ________",
+        "question":"1. When collection of various computers seems a single coherent system to its client, then it is called ________",
         "a":" Computer network",
         "b":" Distributed system",
         "c":" Networking System",
@@ -73,7 +73,7 @@
         },
         {
         "index":2,
-        "question":"Two devices are in network if __________",
+        "question":"2. Two devices are in network if __________",
         "a":" a process in one device is able to exchange information with a process in another device",
         "b":" a process is running on both devices",
         "c":" PIDs of the processes running of different devices are same",
@@ -83,7 +83,7 @@
         
         {
         "index":3,
-        "question":"Which of the following computer networks is built on the top of another network?",
+        "question":"3. Which of the following computer networks is built on the top of another network?",
         "a":" prior network",
         "b":" chief network",
         "c":" prime network",
@@ -92,7 +92,7 @@
         },
             {
         "index":4,
-        "question":"In computer network nodes are _________",
+        "question":"4. In computer network nodes are _________",
         "a":" the computer that originates the data",
         "b":" the computer that routes the data",
         "c":" the computer that terminates the data",
@@ -101,7 +101,7 @@
         },
         {
         "index":5,
-        "question":"Communication channel is shared by all the machines on the network in ________",
+        "question":"5. Communication channel is shared by all the machines on the network in ________",
         "a":" broadcast network",
         "b":" unicast network",
         "c":" multicast network",
@@ -110,7 +110,7 @@
         },
         {
             "index":6,
-            "question":"Bluetooth is an example of __________",
+            "question":"6. Bluetooth is an example of __________",
             "a":"  personal area network",
             "b":" local area network",
             "c":" virtual private network",

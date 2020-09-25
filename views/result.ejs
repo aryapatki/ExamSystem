@@ -1,5 +1,22 @@
-<h1>result!!!!!</h1>
-<h1><%= score %></h1>
+<%- include('./header'); %>
+<span class="login100-form-title p-b-34 p-t-27">
+    SCORE
+</span>
 
-<a href="/homepage">homepage</a>
-<a href="/logout">logout</a>
+<span class="login100-form-title p-b-34 p-t-27">
+    <%= score %>/6
+</span>
+<div class="row" style="margin-top: 30px;">
+    <div class="col-12 col-md-6 container-login100-form-btn">
+        <button class="login100-form-btn">
+            <a href="/homepage">Homepage</a>
+        </button>
+    </div>
+    <div class="col-12 col-md-6 container-login100-form-btn">
+        <button class="login100-form-btn">
+            <a href="/logout">Logout</a>
+        </button>
+    </div>
+</div>
+
+<%- include('./footer'); %>

@@ -46,8 +46,8 @@
                    $.post('/scorecounterOS', {a:a});
                     window.location.replace(data.url);
                 }
-                document.getElementById("qno").innerHTML=data.c.index;
-                document.getElementById("qno").className=data.c.index;
+                // document.getElementById("qno").innerHTML=data.c.index;
+                // document.getElementById("qno").className=data.c.index;
                 document.getElementById("question").innerHTML=data.c.question;
                 document.getElementById("a1").innerHTML=data.c.a;
                 document.getElementById("b1").innerHTML=data.c.b;
@@ -68,19 +68,19 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-                <h1>Question paper</h1>
+                <h1 style="margin-bottom: 30px;">OS Test </h1>
                 <form class="login100-form validate-form" action="" id="myform">
                     <div id="finputs">
-                         <label name="qno" id="qno">1) </label>
+                         <!-- <label name="qno" id="qno">1) </label> -->
                           <label id="question"><%= qs.question %> </label><br>
-                          <label><input type="radio" name="op" value="a" id="a" checked >a)<span id="a1"><%= qs.a %> </span><br></label>
-                          <label><input type="radio" name="op" value="b" id="b"  >b)<span id="b1"><%= qs.b %> </span><br></label>
-                          <label><input type="radio" name="op" value="c" id="c"  >c)<span id="c1"><%= qs.c %> </span><br></label>
-                          <label><input type="radio" name="op" value="d" id="d"  >d)<span id="d1"><%= qs.d %> </span><br></label>
+                          <label><input type="radio" name="op" value="a" id="a" checked > a)<span id="a1"> <%= qs.a %> </span><br></label>
+                          <label><input type="radio" name="op" value="b" id="b"  > b)<span id="b1"> <%= qs.b %> </span><br></label>
+                          <label><input type="radio" name="op" value="c" id="c"  > c)<span id="c1"> <%= qs.c %> </span><br></label>
+                          <label><input type="radio" name="op" value="d" id="d"  > d)<span id="d1"> <%= qs.d %> </span><br></label>
                     </div> 
                   </form>    
-                  <div id="fbuttons">
-                      <button id="np"  class="container-login100-form-btn" onclick="nextPage()">next</button>
+                  <div id="fbuttons" style="margin-top: 25px;" class="container-login100-form-btn">
+                      <button id="np"  class="login100-form-btn" onclick="nextPage()">next</button>
                     </div> 
 
 			</div>
