@@ -6,7 +6,7 @@ var session=require('express-session');
 app.set('view engine', 'ejs');
 var path=require('path');
 app.set('views', path.join(__dirname, 'views'));
-//var auth=require('./routes/auth');
+app.use(express.static(__dirname + '/public'));
 /////////////////////////
 ///////////////////////////////////////////////////
 const bcrypt = require('bcrypt')
@@ -27,7 +27,6 @@ app.use(session({
         resave:false
       }));
  
-//app.use('/auth',auth);
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -50,8 +49,8 @@ initializePassport(
   app.use(passport.session())
   app.use(methodOverride('_method'))
   
-  app.get('/', checkAuthenticated, (req, res) => {
-    res.render('index.ejs', { name: req.user.name })
+  app.get('/',(req, res) => {
+    res.render('register.ejs');
   })
   
   app.get('/login', checkNotAuthenticated, (req, res) => {
@@ -59,7 +58,7 @@ initializePassport(
   })
   
   app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/start',
+    successRedirect: '/homepage',
     failureRedirect: '/login',
     failureFlash: true
   }))
@@ -104,39 +103,104 @@ initializePassport(
   }
   ////////////////////////////////////////////////////////////
  
-app.get('/start',checkAuthenticated,(req,res)=>{
-    res.render('qp',{'qs':db.QuestionSet[0]});
+app.get('/homepage',(req,res)=>{
+  scoreOS=0;
+  scoreCN=0;
+  res.render('homepage.ejs');
+
+})
+
+///////////////////////OS test////////////////////////////////////////////
+
+
+app.get('/startOS',checkAuthenticated,(req,res)=>{
+    res.render('OS',{'qs':db.OS[0]});
+    console.log('inside start');
     req.session.count=0;
     console.log(req.session.count);
 });
 
-///////////////////////////////////////////////////////////////////
 
-app.get('/pageChange',(req,res)=>{
+app.get('/pageChangeOS',checkAuthenticated,(req,res)=>{
     redir="";
     if(req.session.count===6){
         console.log('inside if');
 
-         redir="http://localhost:3000/result";
+         redir="http://localhost:3000/resultOS";
 
     }
-    // else{
+      console.log('inside pagechange');
         if(req.session.count===undefined){
-            req.session.count=0;
+            req.session.count=1;
         }
         console.log(req.session.count);
         res.setHeader('Content-Type','application/json');
-        res.send(JSON.stringify({c:db.QuestionSet[req.session.count++],url:redir}));
-        
-    // }
+        res.send(JSON.stringify({c:db.OS[req.session.count++],url:redir}));
     
 });
 
+app.post('/scorecounterOS',checkAuthenticated,(req,res)=>{
+  console.log(req.body.a);
+  for(i=0;i<6;i++){
+    if(req.body.a[i]===db.OS[i].ans){
+      scoreOS++;
+    }
+  }
+})
 
-app.get('/result',(req,res)=>{
+
+app.get('/resultOS',checkAuthenticated,(req,res)=>{
   console.log('inside result');
-   res.render('result');
+  console.log(scoreOS);
+   res.render('result',{score:scoreOS});
+  //scoreOS=0;
 });
+//////////////////////////////CN test////////////////////////////////////////
+
+
+app.get('/startCN',checkAuthenticated,(req,res)=>{
+  res.render('CN',{'qs':db.OS[0]});
+  console.log('inside start');
+  req.session.count=0;
+  console.log(req.session.count);
+});
+
+
+app.get('/pageChangeCN',checkAuthenticated,(req,res)=>{
+  redir="";
+  if(req.session.count===6){
+      console.log('inside if');
+
+       redir="http://localhost:3000/resultCN";
+
+  }
+    console.log('inside pagechange');
+      if(req.session.count===undefined){
+          req.session.count=1;
+      }
+      console.log(req.session.count);
+      res.setHeader('Content-Type','application/json');
+      res.send(JSON.stringify({c:db.CN[req.session.count++],url:redir}));
+  
+});
+
+app.post('/scorecounterCN',checkAuthenticated,(req,res)=>{
+console.log(req.body.a);
+for(i=0;i<6;i++){
+  if(req.body.a[i]===db.CN[i].ans){
+    scoreCN++;
+  }
+}
+})
+
+app.get('/resultCN',checkAuthenticated,(req,res)=>{
+console.log('inside result');
+console.log(scoreCN);
+ res.render('result',{score:scoreCN});
+ //scoreCN=0;
+});
+
+/////////////////////////////////////////////////////////////////////////
 
 app.listen(3000,()=>{
     console.log("app running on port 3000");

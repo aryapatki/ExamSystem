@@ -1,23 +1,23 @@
 {
-    "QuestionSet":[
+    "OS":[
         {
         "index":1,
-        "question":"The systems which allow only one process execution at a time, are called __________",
-        "a":" uniprogramming systems",
-        "b":" uniprocessing systems",
-        "c":"unitasking systems",
-        "d":"none of the above",
-        "ans":"b"
+        "question":" Which process can be affected by other processes executing in the system?",
+        "a":" cooperating process",
+        "b":" child process",
+        "c":" parent process",
+        "d":" init process",
+        "ans":"a"
         },
 
         {
         "index":2,
-        "question":"Which process can be affected by other processes executing in the system?",
-        "a":" cooperating process",
-        "b":" child process",
-        "c":"parent process",
-        "d":" init process",
-        "ans":"a"
+        "question":" When several processes access the same data concurrently and the outcome of the execution depends on the particular order in which the access takes place, is called?",
+        "a":" dynamic condition",
+        "b":" race condition",
+        "c":" essential condition",
+        "d":" critical condition",
+        "ans":"b"
         },
 
         {
@@ -32,36 +32,92 @@
 
         {
         "index":4,
-        "question":"question4",
-        "a":" uniprogramming systems",
-        "b":" uniprocessing systems",
-        "c":"unitasking systems",
-        "d":"none of the above",
-        "ans":"b"
+        "question":"Which of the following is a synchronisation tool?",
+        "a":" thread",
+        "b":" pipe",
+        "c":" semaphore",
+        "d":" socket",
+        "ans":"c"
             },
 
 
         {
         "index":5,
-        "question":"question5",
-        "a":" uniprogramming systems",
-        "b":" uniprocessing systems",
-        "c":"unitasking systems",
-        "d":"none of the above",
-        "ans":"b"
+        "question":"A semaphore  is a shared integer variable_____",
+        "a":" that can not drop below zero",
+        "b":" that can not be more than zero",
+        "c":" that can not drop below one",
+        "d":" that can not be more than one",
+        "ans":"a"
                 },        
 
         {
         "index":6,
-        "question":"question6",
-        "a":" uniprogramming systems",
-        "b":" uniprocessing systems",
-        "c":"unitasking systems",
-        "d":"none of the above",
-        "ans":"b"
+        "question":"Mutual exclusion can be provided by the ____________",
+        "a":" mutex locks",
+        "b":" binary semaphores",
+        "c":" both mutex locks and binary semaphores",
+        "d":" none of the mentioned",
+        "ans":"c"
         }
     ],
-    "Users":[
+    "CN":[
+        {
+        "index":1,
+        "question":"When collection of various computers seems a single coherent system to its client, then it is called ________",
+        "a":" Computer network",
+        "b":" Distributed system",
+        "c":" Networking System",
+        "d":" Mail System",
+        "ans":"b"
+        },
+        {
+        "index":2,
+        "question":"Two devices are in network if __________",
+        "a":" a process in one device is able to exchange information with a process in another device",
+        "b":" a process is running on both devices",
+        "c":" PIDs of the processes running of different devices are same",
+        "d":" a process is active and another is inactive",
+        "ans":"a"
+        },
         
+        {
+        "index":3,
+        "question":"Which of the following computer networks is built on the top of another network?",
+        "a":" prior network",
+        "b":" chief network",
+        "c":" prime network",
+        "d":" overlay network",
+        "ans":"d"
+        },
+            {
+        "index":4,
+        "question":"In computer network nodes are _________",
+        "a":" the computer that originates the data",
+        "b":" the computer that routes the data",
+        "c":" the computer that terminates the data",
+        "d":" all of the mentioned",
+        "ans":"d"
+        },
+        {
+        "index":5,
+        "question":"Communication channel is shared by all the machines on the network in ________",
+        "a":" broadcast network",
+        "b":" unicast network",
+        "c":" multicast network",
+        "d":" anycast network",
+        "ans":"a"
+        },
+        {
+            "index":6,
+            "question":"Bluetooth is an example of __________",
+            "a":"  personal area network",
+            "b":" local area network",
+            "c":" virtual private network",
+            "d":" wide area network",
+            "ans":"a"
+            }
+
     ]
+   
 }
