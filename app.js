@@ -15,6 +15,7 @@ const flash = require('express-flash')
 const methodOverride = require('method-override')
 const initializePassport = require('./passport-config');
 const { waitForDebugger } = require('inspector');
+var cookieParser = require('cookie-parser');
 //////////////////////////////////////////////////////////////
 
 app.use(bodyParser.json());
@@ -23,10 +24,11 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
     }));
 app.use(session({
         secret:'secret',
-        saveUninitialized:false,
+        saveUninitialized:true,
         resave:false
       }));
  
+app.use(cookieParser());
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -106,6 +108,7 @@ initializePassport(
 app.get('/homepage',(req,res)=>{
   scoreOS=0;
   scoreCN=0;
+  count=0;
   res.render('homepage.ejs');
 
 })
@@ -116,37 +119,29 @@ app.get('/homepage',(req,res)=>{
 app.get('/startOS',checkAuthenticated,(req,res)=>{
     res.render('OS',{'qs':db.OS[0]});
     console.log('inside start');
-    req.session.count=0;
-    console.log(req.session.count);
+    //req.session.count=0;
+    console.log(count);
+    count++;
 });
 
 
 app.get('/pageChangeOS',checkAuthenticated,(req,res)=>{
     redir="";
-    if(req.session.count===6){
+    if(count===6){
         console.log('inside if');
 
          redir="http://localhost:3000/resultOS";
 
     }
       console.log('inside pagechange');
-        if(req.session.count===undefined){
-            req.session.count=1;
-        }
-        console.log(req.session.count);
+        // if(req.session.count===undefined){
+        //     req.session.count=1;
+        // }
+        console.log(count);
         res.setHeader('Content-Type','application/json');
-        res.send(JSON.stringify({c:db.OS[req.session.count++],url:redir}));
+        res.send(JSON.stringify({c:db.OS[count++],url:redir}));
     
 });
-score=0;
-app.post('/scorecounter',checkAuthenticated,(req,res)=>{
-  console.log(req.body.a);
-  for(i=0;i<6;i++){
-    if(req.body.a[i]===db.QuestionSet[i].ans){
-      score++;
-    }
-  }
-})
 
 app.post('/scorecounterOS',checkAuthenticated,(req,res)=>{
   console.log(req.body.a);
@@ -170,26 +165,27 @@ app.get('/resultOS',checkAuthenticated,(req,res)=>{
 app.get('/startCN',checkAuthenticated,(req,res)=>{
   res.render('CN',{'qs':db.OS[0]});
   console.log('inside start');
-  req.session.count=0;
-  console.log(req.session.count);
+  //req.session.count=0;
+  console.log(count);
+  count++;
 });
 
 
 app.get('/pageChangeCN',checkAuthenticated,(req,res)=>{
   redir="";
-  if(req.session.count===6){
+  if(count===6){
       console.log('inside if');
 
        redir="http://localhost:3000/resultCN";
 
   }
     console.log('inside pagechange');
-      if(req.session.count===undefined){
-          req.session.count=1;
-      }
-      console.log(req.session.count);
+      // if(req.session.count===undefined){
+      //     req.session.count=1;
+      // }
+      console.log(count);
       res.setHeader('Content-Type','application/json');
-      res.send(JSON.stringify({c:db.CN[req.session.count++],url:redir}));
+      res.send(JSON.stringify({c:db.CN[count++],url:redir}));
   
 });
 
