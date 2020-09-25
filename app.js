@@ -138,6 +138,15 @@ app.get('/pageChangeOS',checkAuthenticated,(req,res)=>{
         res.send(JSON.stringify({c:db.OS[req.session.count++],url:redir}));
     
 });
+score=0;
+app.post('/scorecounter',checkAuthenticated,(req,res)=>{
+  console.log(req.body.a);
+  for(i=0;i<6;i++){
+    if(req.body.a[i]===db.QuestionSet[i].ans){
+      score++;
+    }
+  }
+})
 
 app.post('/scorecounterOS',checkAuthenticated,(req,res)=>{
   console.log(req.body.a);
