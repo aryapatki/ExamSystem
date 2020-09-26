@@ -105,7 +105,7 @@ initializePassport(
   }
   ////////////////////////////////////////////////////////////
  
-app.get('/homepage',(req,res)=>{
+app.get('/homepage',checkAuthenticated,(req,res)=>{
   scoreOS=0;
   scoreCN=0;
   count=0;
